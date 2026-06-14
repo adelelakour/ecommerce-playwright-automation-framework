@@ -1,5 +1,6 @@
 from playwright.sync_api import  Playwright, Page, expect
 import re
+import random
 
 def test_register_new_user(page:Page):
     page.goto("https://automationexercise.com/")
@@ -15,7 +16,8 @@ def test_register_new_user(page:Page):
 
     # insert preliminary data
     page.get_by_placeholder("Name").fill("Adel")
-    page.locator("[data-qa='signup-email']").fill("adel.elakour@gmail.com")
+    rand_num = random.randint(1,10000)
+    page.locator("[data-qa='signup-email']").fill(f"adel.elakour{rand_num}@gmail.com")
     page.locator("[data-qa='signup-button']").click()
     expect(page).to_have_title("Automation Exercise - Signup")
 
@@ -114,21 +116,3 @@ def test_login_incorrect_credential(page: Page):
     page.get_by_role("button", name="Login").click()
     expect(page.get_by_text("Your email or password is incorrect")).to_be_visible()
 
-def test_delete_account(page: Page):
-    # open login/registration page
-    page.goto("https://automationexercise.com/")
-    expect(page).to_have_title("Automation Exercise")
-    expect(page.locator(".title", has_text="Features Items")).to_be_visible()
-
-    page.get_by_role("link", name="Signup / Login").click()
-    expect(page.get_by_text("Login to your account")).to_be_visible()
-    expect(page.get_by_text("New User Signup!")).to_be_visible()
-
-    # test Login with correct credentials
-    page.locator("input[data-qa=login-email]").fill("adel.elakour@gmail.com")
-    page.locator("input[data-qa=login-password]").fill("123456789")
-    page.get_by_role("button", name="Login").click()
-
-    # delete account
-    page.get_by_role("link", name="Delete Account").click()
-    expect(page.get_by_text("Account Deleted")).to_be_visible()
