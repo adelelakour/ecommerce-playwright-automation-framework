@@ -2,6 +2,8 @@
 
 This repository contains end-to-end UI tests for [Automation Exercise](https://automationexercise.com/) using Python, `pytest`, and Playwright. The suite covers core user journeys such as account registration, authentication, product browsing, contact form submission, and checkout.
 
+⚠️ **Status: Blocked - Target Website Unavailable**
+
 ## Overview
 
 The tests are written against the public Automation Exercise demo site and are intended to validate common browser-based workflows:
