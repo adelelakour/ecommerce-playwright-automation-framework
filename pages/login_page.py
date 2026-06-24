@@ -11,7 +11,7 @@ class Login(BasePage):
         self.login_button = page.get_by_role("button", name="Login")
 
 
-    def login_valid_credential(self, email, password):
+    def login_process(self, email, password):
         self.login_tab.click()
         self.login_email_address.fill(email)
         self.login_password.fill(password)
@@ -47,8 +47,6 @@ class Signup(BasePage):
         self.mobile =   page.get_by_role("textbox", name="Mobile Number *")
         self.create_account_button = page.get_by_role("button", name="Create Account")
 
-
-
     def create_account(self, signup_name, signup_email, gender, password, day, month,
                        year, first_name, last_name, address, country, state, city, zip, mobile_number):
 
@@ -76,3 +74,11 @@ class Signup(BasePage):
         self.mobile.fill(mobile_number)
 
         self.create_account_button.click()
+
+
+    def create_account_invalid_email(self, signup_name, signup_email):
+        #first_signup_page
+        self.signup_name.fill(signup_name)
+        self.signup_email.fill(signup_email)
+        self.signup_button.click()
+
